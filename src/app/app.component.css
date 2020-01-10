@@ -1,0 +1,104 @@
+.content {
+  position: relative;
+}
+h1, h2, h3 ,h4, h5, h6 {
+  color: #fff;
+}
+.title {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+.flex {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.canvas {
+  position: relative;
+  height: 700px;
+  margin-left: 200px;
+}
+
+.canvas .roting {
+  animation:rotating 0.5s linear infinite
+}
+
+@keyframes rotating{
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
+}
+
+.canvas img {
+  position: absolute;
+  height: 211px;
+  left: 286px;
+  width: 159px;
+  top: 228px;
+}
+
+.prize-op .prize-doing {
+  background: #fff;
+  color: black;
+}
+
+.prize-op button:disabled {
+  color: rgba(0,0,0,.25);
+  background-color: rgb(245, 245, 245);
+  border-color: rgb(217, 217, 217);
+}
+
+.prize-op button {
+  padding: 8px 18px;
+  border: 1px solid white;
+  border-radius: 8px;
+  margin-right: 15px;
+  background: red;
+  color: #fff;
+  outline: none;
+}
+
+.user-list {
+  padding: 20px;
+  border: 1px solid grey;
+}
+
+span.userName {
+  display: inline-block;
+  padding: 8px 18px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  border: 1px solid;
+  border-radius: 8px;
+}
+
+
+.flex-right .item {
+  padding: 20px;
+  border: 1px solid grey;
+  margin-bottom: 30px;
+}
+
+.hoverable {
+  cursor: pointer;
+}
+
+.prize-op {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.first {
+
+}
+
+.second {
+
+}
+
+.third {
+
+}

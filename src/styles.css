@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background: url('./assets/images/bg.png');
+  color: #fff;
+}
+
+.ant-modal-confirm-body .ant-modal-confirm-content {
+  font-size: 60px;
+  text-align: center;
+  color: red;
+}
+.ant-modal-confirm-btns {
+  width: 100%;
+  text-align: center;
+}
