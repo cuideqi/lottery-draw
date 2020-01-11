@@ -13,3 +13,8 @@ body {
   width: 100%;
   text-align: center;
 }
+
+.ant-btn.ant-btn-primary {
+  background: rgb(255, 0, 0);
+  border: none;
+}

@@ -9,8 +9,9 @@ import { NzModalService } from 'ng-zorro-antd';
 export class AppComponent implements OnInit, AfterViewInit {
 
   totalUserList = [
-    '郑思林', '仲伟伦', '祝伟健', '谢关明', '崔德奇', '瞿佳利', '徐攀召', '刘书琳', '刘玲玲', '朱文瑄', '李莹', '杨云飞', '蒋文悦',
-    '李梦梦', '薛葭葭', '瞿海英', '谢雨欣', '刘露迎', '保住田野', '周福菊', '田沐云', '王婷', '冯璟彧'
+    '郑思林', '仲伟伦', '祝伟健', '谢关明', '崔德奇', '瞿佳利', '徐攀召', '刘书琳', '刘玲玲', '朱文瑄',
+    '李莹', '杨云飞', '蒋文悦', '李梦梦', '薛葭葭', '瞿海英', '谢雨欣', '刘露迎', '保住田野', '周福菊',
+    '田沐云', '王婷', '冯璟彧', '程浩', '陈贞健', '田勇', '罗成坚'
   ];
 
   userList = [];
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   firstPrizeNum = 1; // 一等奖个数
   secondPrizeNum = 2; // 二等奖个数
-  thirdPrizeNum = 5; // 三等奖个数
+  thirdPrizeNum = 6; // 三等奖个数
 
   firstPrizeList = []; // 一等奖人员名单
   secondPrizeList = []; // 二等奖人员名单
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('canvas', undefined) canvas: ElementRef;
   @ViewChild('music', undefined) music: ElementRef;
   constructor(private render: Renderer2, private cacheService: CacheService, private messsage: NzModalService) {
-
+    console.log(this.totalUserList.length);
   }
 
   ngOnInit() {
@@ -53,7 +54,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   rotate() {
-    if (this.firstPrizeList.length === 1 && this.secondPrizeList.length === 2 && this.thirdPrizeList.length === 5) {
+    if (this.firstPrizeList.length === this.firstPrizeNum
+       && this.secondPrizeList.length === this.secondPrizeNum
+       && this.thirdPrizeList.length === this.thirdPrizeNum) {
       this.setMessage('抽奖已经结束！');
       return;
     }
@@ -61,13 +64,13 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.setMessage('请先选择抽奖等级！');
       return;
     }
-    if (this.whichPrizeIsDoing === 3 && this.thirdPrizeList.length >= 5) {
+    if (this.whichPrizeIsDoing === 3 && this.thirdPrizeList.length >= this.thirdPrizeNum) {
       this.setMessage('三等奖已经抽完，请选择其他等级抽奖！');
       return;
-    } else if (this.whichPrizeIsDoing === 2 && this.secondPrizeList.length >= 2) {
+    } else if (this.whichPrizeIsDoing === 2 && this.secondPrizeList.length >= this.secondPrizeNum) {
       this.setMessage('二等奖已经抽完，请选择其他等级抽奖！');
       return;
-    } else if (this.whichPrizeIsDoing === 1 && this.firstPrizeList.length >= 1) {
+    } else if (this.whichPrizeIsDoing === 1 && this.firstPrizeList.length >= this.firstPrizeNum) {
       this.setMessage('一等奖已经抽完，请选择其他等级抽奖！');
       return;
     }
@@ -94,20 +97,21 @@ export class AppComponent implements OnInit, AfterViewInit {
     const rotateRad = this.randomAngel % 360 * Math.PI / 180; // 旋转的弧度
     const singleAngel = Math.PI * 2 / this.userList.length; // 每个分割的弧度
     const rotateRadNum = Math.floor(rotateRad / singleAngel);
-    console.log(this.userList[this.userList.length - rotateRadNum - 1 ]);
     const prizeName = this.userList[this.userList.length - rotateRadNum - 1];
     if (prizeName) {
-      if (this.whichPrizeIsDoing === 3 && this.thirdPrizeList.length < 5) {
-        this.thirdPrizeList.push(prizeName);
-        this.cacheService.setKey(THIRD_PRIZE_LIST, JSON.stringify(this.thirdPrizeList));
-      } else if (this.whichPrizeIsDoing === 2 && this.secondPrizeList.length < 2) {
-        this.secondPrizeList.push(prizeName);
-        this.cacheService.setKey(SECOND_PRIZE_LIST, JSON.stringify(this.secondPrizeList));
-      } else if (this.whichPrizeIsDoing === 1 && this.firstPrizeList.length < 1) {
-        this.firstPrizeList.push(prizeName);
-        this.cacheService.setKey(FIRST_PRIZE_LIST, JSON.stringify(this.firstPrizeList));
-      } else {
-        return;
+      if (!this.isNotPrizeName(prizeName)) {
+        if (this.whichPrizeIsDoing === 3 && this.thirdPrizeList.length < this.thirdPrizeNum) {
+          this.thirdPrizeList.push(prizeName);
+          this.cacheService.setKey(THIRD_PRIZE_LIST, JSON.stringify(this.thirdPrizeList));
+        } else if (this.whichPrizeIsDoing === 2 && this.secondPrizeList.length < this.secondPrizeNum) {
+          this.secondPrizeList.push(prizeName);
+          this.cacheService.setKey(SECOND_PRIZE_LIST, JSON.stringify(this.secondPrizeList));
+        } else if (this.whichPrizeIsDoing === 1 && this.firstPrizeList.length < this.firstPrizeNum) {
+          this.firstPrizeList.push(prizeName);
+          this.cacheService.setKey(FIRST_PRIZE_LIST, JSON.stringify(this.firstPrizeList));
+        } else {
+          return;
+        }
       }
       this.userList = this.userList.filter(user => user !== prizeName);
       this.cacheService.setKey(TOTAL_USER_LIST, JSON.stringify(this.userList));
@@ -161,6 +165,14 @@ export class AppComponent implements OnInit, AfterViewInit {
       nzIconType: null,
       nzContent: info,
       nzMask: false,
+      nzStyle: {
+        color: 'black'
+      }
     });
+  }
+
+  isNotPrizeName(name: string) {
+    const noPrizeName = ['程浩', '陈贞健', '田勇', '罗成坚'];
+    return noPrizeName.includes(name);
   }
 }

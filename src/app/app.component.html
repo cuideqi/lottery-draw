@@ -1,5 +1,5 @@
 <div class="content">
-  <h2 class="title">2019年右上角幸运大抽奖</h2>
+  <h2 class="title">2019年右云年会幸运大抽奖</h2>
   <div>
     <div class="flex">
       <div class="canvas">
@@ -10,28 +10,28 @@
   </div>
   <div class="flex prize-op">
     <div class="item">
-      <h4>抽奖前请选择抽奖级别！！！</h4>
-      <button class="userName hoverable" [disabled]="firstPrizeList.length > 0"
+      <h2>抽奖前请选择抽奖级别！！！</h2>
+      <button class="userName hoverable" [disabled]="firstPrizeList.length >= firstPrizeNum"
         [ngClass]="{'prize-doing': whichPrizeIsDoing === 1}" (click)="doWhichPrize(1)">抽取一等奖...</button>
-      <button class="userName hoverable" [disabled]="secondPrizeList.length > 1"
+      <button class="userName hoverable" [disabled]="secondPrizeList.length >= secondPrizeNum"
         [ngClass]="{'prize-doing': whichPrizeIsDoing === 2}" (click)="doWhichPrize(2)">抽取二等奖...</button>
-      <button class="userName hoverable" [disabled]="thirdPrizeList.length > 4"
+      <button class="userName hoverable" [disabled]="thirdPrizeList.length >= thirdPrizeNum"
         [ngClass]="{'prize-doing': whichPrizeIsDoing === 3}" (click)="doWhichPrize(3)">抽取三等奖...</button>
     </div>
     <div class="first item">
-      <h3>一等奖（共一位）已产生{{firstPrizeList.length}}位</h3>
+      <h2>一等奖（共1位）已产生{{firstPrizeList.length}}位</h2>
       <ng-container *ngFor="let user of firstPrizeList">
         <span class="userName">{{user}}</span>
       </ng-container>
     </div>
     <div class="second item">
-      <h3>二等奖（共二位）已产生{{secondPrizeList.length}}位</h3>
+      <h2>二等奖（共2位）已产生{{secondPrizeList.length}}位</h2>
       <ng-container *ngFor="let user of secondPrizeList">
         <span class="userName">{{user}}</span>
       </ng-container>
     </div>
     <div class="third item">
-      <h3>三等奖（共五位）已产生{{thirdPrizeList.length}}位</h3>
+      <h2>三等奖（共6位）已产生{{thirdPrizeList.length}}位</h2>
       <ng-container *ngFor="let user of thirdPrizeList">
         <span class="userName">{{user}}</span>
       </ng-container>
