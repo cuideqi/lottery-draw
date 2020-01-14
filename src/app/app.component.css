@@ -7,7 +7,7 @@ h1, h2, h3 ,h4, h5, h6 {
 .title {
   text-align: center;
   font-size: 80px;
-  margin-bottom: 15px;
+  margin-bottom: -20px;
 }
 .flex {
   height: 100%;
@@ -20,7 +20,7 @@ h1, h2, h3 ,h4, h5, h6 {
 .canvas {
   position: relative;
   height: 700px;
-  margin-left: 200px;
+  margin-left: 50px;
 }
 
 .canvas .roting {

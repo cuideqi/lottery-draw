@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   randomAngel = 0; // 随机角度
 
   firstPrizeNum = 1; // 一等奖个数
-  secondPrizeNum = 2; // 二等奖个数
+  secondPrizeNum = 3; // 二等奖个数
   thirdPrizeNum = 6; // 三等奖个数
 
   firstPrizeList = []; // 一等奖人员名单
